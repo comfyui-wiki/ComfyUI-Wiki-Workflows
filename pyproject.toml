@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-wiki-workflows"
+version = "0.1.0"
+description = "Workflow templates from ComfyUI Wiki - No custom nodes or dependencies included"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/comfyui-wiki/ComfyUI-Wiki-Workflows"
+Homepage = "https://comfyui-wiki.com/"
+
+[tool.comfy]
+PublisherId = "comfyui-wiki"
+DisplayName = "ComfyUI Wiki Workflows"
+requires-comfyui = ">=1.0.0" 
