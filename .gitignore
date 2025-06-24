@@ -9,3 +9,5 @@
 .coverage.*.*
 .coverage.*.*.*
 __pycache__
+.ruff_cache
+node.zip
