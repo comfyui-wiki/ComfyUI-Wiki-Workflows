@@ -11,4 +11,4 @@ Homepage = "https://comfyui-wiki.com/"
 [tool.comfy]
 PublisherId = "comfyui-wiki"
 DisplayName = "ComfyUI Wiki Workflows"
-requires-comfyui = ">=1.0.0" 
+requires-comfyui = ">=0.0.2" 
