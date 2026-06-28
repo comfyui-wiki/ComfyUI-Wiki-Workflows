@@ -1,0 +1,151 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 875003583517926,
+      "steps": 25,
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "19",
+        0
+      ],
+      "negative": [
+        "19",
+        1
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "SD1.5\\dreamshaper_8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "6": {
+    "inputs": {
+      "text": "medieval knight, detailed shining armor, intricate engravings, battle-worn, majestic, misty forest, dawn lighting, longsword with glowing runes, crimson cape, realistic metal textures, heraldic shield, polished helmet, golden aura, medieval castle background, cinematic lighting, highly detailed, 8k, ultra realistic, sharp focus, epic composition",
+      "speak_and_recognation": true,
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "text": "blurry, deformed, cartoonish, futuristic, sci-fi elements, modern weapons, dull colors, disproportionate body, incorrect medieval details, excessive ornaments, flat lighting, simplistic design, unrealistic textures, messy background",
+      "speak_and_recognation": true,
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "Result",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "11": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "12": {
+    "inputs": {
+      "image": "Result_00005_.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage"
+  },
+  "13": {
+    "inputs": {
+      "low_threshold": 0.4,
+      "high_threshold": 0.7,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "Canny"
+  },
+  "14": {
+    "inputs": {
+      "control_net_name": "SD1.5\\control_v11p_sd15_canny.pth"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "17": {
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "19": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "control_net": [
+        "14",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced"
+  }
+}

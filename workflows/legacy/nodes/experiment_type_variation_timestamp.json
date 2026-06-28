@@ -1,0 +1,153 @@
+{
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "v1-5-pruned.ckpt"
+    }
+  },
+  "5": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "batch_size": 4, 
+      "height": 768,
+      "width": 512
+    }
+  },
+
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["4", 1],
+      "text": "a young woman in a white dress, standing in a garden, natural lighting, photorealistic"
+    }
+  },
+
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["4", 1],
+      "text": "oil painting, Renaissance style, Rembrandt lighting, dramatic shadows, rich colors"
+    }
+  },
+
+  "8": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["4", 1],
+      "text": "intricate fabric details, detailed hair strands, soft skin texture, detailed flowers in background"
+    }
+  },
+
+  "9": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["4", 1],
+      "text": "bad quality, worst quality, low resolution, blurry, distorted, deformed, disfigured, bad anatomy, watermark, signature, text"
+    }
+  },
+
+  "10": {
+    "class_type": "ConditioningConcat",
+    "inputs": {
+      "conditioning_to": ["6", 0],
+      "conditioning_from": ["7", 0]
+    }
+  },
+
+  "11": {
+    "class_type": "ConditioningConcat",
+    "inputs": {
+      "conditioning_to": ["10", 0],
+      "conditioning_from": ["8", 0]
+    }
+  },
+
+  "12": {
+    "class_type": "KSampler",
+    "inputs": {
+      "cfg": 8,
+      "denoise": 1,
+      "latent_image": ["5", 0],
+      "model": ["4", 0],
+      "negative": ["9", 0],
+      "positive": ["6", 0], 
+      "sampler_name": "DPM++ 2M Karras",
+      "scheduler": "karras",
+      "seed": 8566257,
+      "steps": 30
+    }
+  },
+  "13": {
+    "class_type": "KSampler",
+    "inputs": {
+      "cfg": 8,
+      "denoise": 1,
+      "latent_image": ["5", 0],
+      "model": ["4", 0],
+      "negative": ["9", 0],
+      "positive": ["10", 0],
+      "sampler_name": "DPM++ 2M Karras",
+      "scheduler": "karras",
+      "seed": 8566257,
+      "steps": 30
+    }
+  },
+  "14": {
+    "class_type": "KSampler",
+    "inputs": {
+      "cfg": 8,
+      "denoise": 1,
+      "latent_image": ["5", 0],
+      "model": ["4", 0],
+      "negative": ["9", 0],
+      "positive": ["11", 0], 
+      "sampler_name": "DPM++ 2M Karras",
+      "scheduler": "karras",
+      "seed": 8566257,
+      "steps": 30
+    }
+  },
+
+  "15": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["12", 0],
+      "vae": ["4", 2]
+    }
+  },
+  "16": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["13", 0],
+      "vae": ["4", 2]
+    }
+  },
+  "17": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["14", 0],
+      "vae": ["4", 2]
+    }
+  },
+  "18": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "base_only",
+      "images": ["15", 0]
+    }
+  },
+  "19": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "base_plus_style",
+      "images": ["16", 0]
+    }
+  },
+  "20": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "full_combination",
+      "images": ["17", 0]
+    }
+  }
+}

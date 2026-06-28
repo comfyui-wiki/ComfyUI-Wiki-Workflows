@@ -1,0 +1,144 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 893577662262879,
+      "steps": 30,
+      "cfg": 6,
+      "sampler_name": "euler",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "23",
+        0
+      ],
+      "negative": [
+        "23",
+        1
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "SD1.5\\dreamshaper_8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "5": {
+    "inputs": {
+      "width": 768,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "6": {
+    "inputs": {
+      "text": "A futuristic cyberpunk living room with neon lights in shades of pink, blue, and purple, casting a soft glow across the room. Minimalist furniture with metallic and glass surfaces. A sleek sofa with glowing edges and a holographic coffee table at the center. The walls feature illuminated circuit-like patterns or digital panels displaying abstract graphics. Large windows show a vibrant cityscape with glowing skyscrapers and flying vehicles in the distance. The atmosphere is high-tech, moody, and vibrant, with clear depth and perspective.",
+      "speak_and_recognation": true,
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "text": "No clutter, no traditional or rustic elements, no overly bright or harsh lighting, no blurry or distorted depth, no flat colors, no cartoonish or unrealistic proportions, no chaotic or overcrowded designs.",
+      "speak_and_recognation": true,
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "Result",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "12": {
+    "inputs": {
+      "image": "Result_00029_.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage"
+  },
+  "14": {
+    "inputs": {
+      "control_net_name": "SD1.5\\control_v11f1p_sd15_depth.pth"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "17": {
+    "inputs": {
+      "images": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "21": {
+    "inputs": {
+      "resolution": 512,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "Zoe-DepthMapPreprocessor"
+  },
+  "23": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "control_net": [
+        "14",
+        0
+      ],
+      "image": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced"
+  }
+}

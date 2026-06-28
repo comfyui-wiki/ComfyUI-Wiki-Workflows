@@ -1,0 +1,519 @@
+{
+  "last_node_id": 20,
+  "last_link_id": 17,
+  "nodes": [
+    {
+      "id": 17,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1139,
+        "1": -210
+      },
+      "size": {
+        "0": 314.10235595703125,
+        "1": 510.94549560546875
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 12,
+          "label": "images"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 19,
+      "type": "DualCLIPLoaderGGUF",
+      "pos": {
+        "0": -94.93519592285156,
+        "1": -76.6426773071289
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            17
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoaderGGUF"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "flux_gguf\\t5-v1_1-xxl-encoder-Q8_0.gguf",
+        "flux"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 890,
+        "1": -211
+      },
+      "size": {
+        "0": 169.0520782470703,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 16,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "ConditioningZeroOut",
+      "pos": {
+        "0": 286,
+        "1": 131
+      },
+      "size": {
+        "0": 211.60000610351562,
+        "1": 26
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 13,
+          "label": "conditioning"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -25,
+        "1": 130
+      },
+      "size": {
+        "0": 216.75921630859375,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            2
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 15,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 261,
+        "1": -216
+      },
+      "size": {
+        "0": 245.41822814941406,
+        "1": 272.1675109863281
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 17,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            13,
+            15
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "A beautiful garden with colorful flowers and a gentle breeze. One girl stands in the center.",
+        "A beautiful garden with colorful flowers and a gentle breeze. One girl stands in the center.",
+        3.5
+      ]
+    },
+    {
+      "id": 10,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": -49.935218811035156,
+        "1": -210.64266967773438
+      },
+      "size": {
+        "0": 266.6243591308594,
+        "1": 71.75386810302734
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "flux_schnell\\flux1-schnell-Q6_K.gguf"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": {
+        "0": 562,
+        "1": -213
+      },
+      "size": {
+        "0": 271.3189697265625,
+        "1": 476.9822692871094
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 14,
+          "label": "negative"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 2,
+          "label": "latent_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        425948886010830,
+        "fixed",
+        4,
+        1,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 12,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -445,
+        "1": -50
+      },
+      "size": {
+        "0": 279.6794128417969,
+        "1": 107.2164077758789
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "VAELoader",
+      "pos": {
+        "0": -11,
+        "1": -327
+      },
+      "size": {
+        "0": 220.6435546875,
+        "1": 58.50890350341797
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux_ae.safetensors"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "Note",
+      "pos": {
+        "0": -512,
+        "1": 133
+      },
+      "size": {
+        "0": 426.30084228515625,
+        "1": 476.4090881347656
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "1. Download [Flux GGUF dev model](https://huggingface.co/city96/FLUX.1-dev-gguf) or [Flux GGUF schnell model](https://huggingface.co/city96/FLUX.1-schnell-gguf) and place the model file in the `comfyui/models/unet` directory.\n\n2. Download [t5-v1_1-xxl-encoder-gguf](https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf) and place the model file in the `comfyui/models/clip` directory.\n\n3. Download [clip_l.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors) and place the model file in the `comfyui/models/clip` directory.\n\n4. Download [ae.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors) and place the model file in the `comfyui/models/vae`  directory.\n\n5. Install [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) plugin.\n\n6. If you are using the dev model, set the step of Ksampler to 20. If it is schnell, set the step to 4.\n\n\n1. 下载 [Flux GGUF dev 模型](https://huggingface.co/city96/FLUX.1-dev-gguf) 或 [Flux GGUF schnell 模型](https://huggingface.co/city96/FLUX.1-schnell-gguf) 并将模型文件放置在 `comfyui/models/unet` 目录下 \n\n2. 下载 [t5-v1_1-xxl-encoder-gguf](https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf),并将模型文件放置在 `comfyui/models/clip` 目录下\n\n3. 下载 [clip_l.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors) 并将模型文件放置在 `comfyui/models/clip` 目录下\n\n4. 下载 [ae.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors) 并将模型文件放置在 `comfyui/models/vae` 目录下,建议重命名为 `flux_ae.safetensors`\n\n5. 安装 [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) 插件\n\n6. 如果你使用的是 dev 模型，请将 Ksampler 的 step 设置为 20 , 如果是 schnell 则将 step 设置为 4"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      2,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      10,
+      10,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      8,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      15,
+      0,
+      16,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      16,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      15,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      11,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      17,
+      19,
+      0,
+      15,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "load model",
+      "bounding": [
+        -105,
+        -398,
+        335,
+        437
+      ],
+      "color": "#3f789e",
+      "font_size": 22,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5131581182307068,
+      "offset": [
+        1629.1647416269402,
+        580.5581562724883
+      ]
+    }
+  },
+  "version": 0.4
+}

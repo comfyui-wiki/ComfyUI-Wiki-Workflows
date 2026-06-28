@@ -1,0 +1,341 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 12,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "JanusModelLoader",
+      "pos": [
+        1403.184326171875,
+        1850.845703125
+      ],
+      "size": [
+        315,
+        78
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "JANUS_MODEL",
+          "links": [
+            1,
+            9
+          ],
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "processor",
+          "type": "JANUS_PROCESSOR",
+          "links": [
+            2,
+            10
+          ],
+          "slot_index": 1,
+          "label": "processor"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JanusModelLoader"
+      },
+      "widgets_values": [
+        "deepseek-ai/Janus-Pro-1B"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2236.09228515625,
+        1839.0609130859375
+      ],
+      "size": [
+        328.9017639160156,
+        170.27947998046875
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "The image features a dark background with a series of concentric circular patterns in shades of blue and green. At the center of the image, there is a logo consisting of three interconnected shapes forming a stylized \"C\" or \"C-like\" symbol. Below the logo, the text reads \"ComfyUI-Wiki.com.\" The overall design is sleek and modern, with a focus on the logo and text."
+      ]
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        1404.26708984375,
+        1992.97705078125
+      ],
+      "size": [
+        315,
+        314
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3
+          ],
+          "slot_index": 0,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "og-image.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "PreviewImage",
+      "pos": [
+        2247.105712890625,
+        2144.306396484375
+      ],
+      "size": [
+        211.5784454345703,
+        267.52203369140625
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 8,
+          "label": "images"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 7,
+      "type": "JanusImageGeneration",
+      "pos": [
+        1817.775390625,
+        2139.34326171875
+      ],
+      "size": [
+        400,
+        265
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "JANUS_MODEL",
+          "link": 9,
+          "label": "model"
+        },
+        {
+          "name": "processor",
+          "type": "JANUS_PROCESSOR",
+          "link": 10,
+          "label": "processor"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            8
+          ],
+          "slot_index": 0,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JanusImageGeneration"
+      },
+      "widgets_values": [
+        "A girl in a yellow dress gazes at autumn mountains with flying birds, Studio Ghibli watercolor style, warm sunlight",
+        950231276616433,
+        "randomize",
+        1,
+        5,
+        1,
+        0.95,
+        true
+      ]
+    },
+    {
+      "id": 3,
+      "type": "JanusImageUnderstanding",
+      "pos": [
+        1812.2784423828125,
+        1836.7227783203125
+      ],
+      "size": [
+        400,
+        236
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "JANUS_MODEL",
+          "link": 1,
+          "label": "model"
+        },
+        {
+          "name": "processor",
+          "type": "JANUS_PROCESSOR",
+          "link": 2,
+          "label": "processor"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 3,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JanusImageUnderstanding"
+      },
+      "widgets_values": [
+        "Describe this image in detail",
+        546830659712403,
+        "randomize",
+        0.1,
+        0.95,
+        512,
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      3,
+      0,
+      "JANUS_MODEL"
+    ],
+    [
+      2,
+      2,
+      1,
+      3,
+      1,
+      "JANUS_PROCESSOR"
+    ],
+    [
+      3,
+      1,
+      0,
+      3,
+      2,
+      "IMAGE"
+    ],
+    [
+      8,
+      7,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      9,
+      2,
+      0,
+      7,
+      0,
+      "JANUS_MODEL"
+    ],
+    [
+      10,
+      2,
+      1,
+      7,
+      1,
+      "JANUS_PROCESSOR"
+    ],
+    [
+      12,
+      3,
+      0,
+      9,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8954302432553072,
+      "offset": [
+        -997.7563035081624,
+        -1665.4362795389377
+      ]
+    }
+  },
+  "version": 0.4
+}

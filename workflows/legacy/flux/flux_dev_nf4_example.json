@@ -1,0 +1,475 @@
+
+{
+  "last_node_id": 23,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 18,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -112.47261047363281,
+        "1": 898.3658447265625
+      },
+      "size": {
+        "0": 283.2410888671875,
+        "1": 76
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 26,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            23
+          ],
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 19,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 456.5273742675781,
+        "1": 548.3658447265625
+      },
+      "size": {
+        "0": 159.7108917236328,
+        "1": 46
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 27,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 28,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30
+          ],
+          "slot_index": 0,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -118,
+        "1": 959
+      },
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 21,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 660,
+        "1": 550
+      },
+      "size": {
+        "0": 379.9938659667969,
+        "1": 418.6220397949219
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 30,
+          "label": "images"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 20,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": 162,
+        "1": 540
+      },
+      "size": {
+        "0": 211.60000610351562,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 29,
+          "label": "conditioning"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ]
+    },
+    {
+      "id": 15,
+      "type": "KSampler",
+      "pos": {
+        "0": 167,
+        "1": 666
+      },
+      "size": [
+        249.92926025390625,
+        474
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 21,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 22,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 23,
+          "label": "negative"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 24,
+          "label": "latent_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            27
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1051714967728528,
+        "randomize",
+        20,
+        1,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 17,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -140,
+        "1": 663
+      },
+      "size": {
+        "0": 243.1743621826172,
+        "1": 184.5043182373047
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 25,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            29
+          ],
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A beautiful garden with colorful flowers and a gentle breeze. One girl stands in the center."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 22,
+      "type": "CheckpointLoaderNF4",
+      "pos": {
+        "0": -550,
+        "1": 569
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            21
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            25,
+            26
+          ],
+          "slot_index": 1,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            28
+          ],
+          "slot_index": 2,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderNF4"
+      },
+      "widgets_values": [
+        "flux_nf4\\flux1-dev-bnb-nf4-v2.safetensors"
+      ]
+    },
+    {
+      "id": 23,
+      "type": "Note",
+      "pos": {
+        "0": -596,
+        "1": 737
+      },
+      "size": {
+        "0": 355.3496398925781,
+        "1": 474.65673828125
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "1. It is necessary to install the [ComfyUI_bitsandbytes_NF4 plugin](https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4) in advance.\n\n2. The model file needs to be downloaded: https://huggingface.co/lllyasviel/flux1-dev-bnb-nf4/blob/main/flux1-dev-bnb-nf4-v2.safetensors.\n\n3. Please install the model file to the `comfyui/models/checkpoints` directory.\n\n4. Due to the good understanding ability of the Flux model for prompts, negative prompts in the workflow do not need any content input.\n\n1. 需要预先安装 [ComfyUI_bitsandbytes_NF4 插件](https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4)。\n\n2. 需要下载模型文件：https://huggingface.co/lllyasviel/flux1-dev-bnb-nf4/blob/main/flux1-dev-bnb-nf4-v2.safetensors。\n\n3. 模型文件请安装至 `comfyui/models/checkpoints` 目录。\n\n4. 由于 Flux 模型对提示词良好的理解能力，在工作流中的负向提示词并不需要任何的内容输入。\n\nsource: https://comfyui-wiki.com/tutorial/advanced/flux1-comfyui-guide-workflow-and-examples"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      21,
+      22,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      22,
+      20,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      23,
+      18,
+      0,
+      15,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      24,
+      16,
+      0,
+      15,
+      3,
+      "LATENT"
+    ],
+    [
+      25,
+      22,
+      1,
+      17,
+      0,
+      "CLIP"
+    ],
+    [
+      26,
+      22,
+      1,
+      18,
+      0,
+      "CLIP"
+    ],
+    [
+      27,
+      15,
+      0,
+      19,
+      0,
+      "LATENT"
+    ],
+    [
+      28,
+      22,
+      2,
+      19,
+      1,
+      "VAE"
+    ],
+    [
+      29,
+      17,
+      0,
+      20,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      30,
+      19,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        265.42435458496175,
+        -389.2668931252251
+      ]
+    }
+  },
+  "version": 0.4
+}
